@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="bbc-javaee-example:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="highlevelexample-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="bbc-javaee-example:war exploded" />
+    </root>
+  </artifact>
+</component>
