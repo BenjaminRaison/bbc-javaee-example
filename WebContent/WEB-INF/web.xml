@@ -3,12 +3,6 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
     <display-name>example</display-name>
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>No Access</web-resource-name>
-            <url-pattern>/*.xhtml</url-pattern>
-        </web-resource-collection>
-    </security-constraint>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>
@@ -23,7 +17,7 @@
     <context-param>
         <param-name>javax.faces.WEBAPP_RESOURCES_DIRECTORY</param-name>
         <param-value>
-            /WEB-INF/resources
+            /resources
         </param-value>
     </context-param>
     <welcome-file-list>
