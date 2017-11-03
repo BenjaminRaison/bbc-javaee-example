@@ -26,6 +26,7 @@ public final class PasswordUtil {
      */
     public static final String ID = "$31$";
 
+    // TODO: USE CONFIG VALUE
     /**
      * The minimum recommended COST, used by default
      */
