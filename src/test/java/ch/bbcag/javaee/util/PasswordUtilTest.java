@@ -2,9 +2,10 @@ package ch.bbcag.javaee.util;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -17,13 +18,12 @@ import static org.junit.Assert.assertTrue;
 public class PasswordUtilTest {
 
     @Deployment
-    public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class)
+    public static Archive<?> createDeployment() {
+        return ShrinkWrap.create(WebArchive.class)
                          .addAsManifestResource(
-                                 EmptyAsset.INSTANCE,
-                                 "beans.xml").addAsResource(new File("WebContent/WEB-INF/config.properties"))
-                         .addClasses
-                                 (ConfigHandler.class, LogHelper.class, EnumConfig.class, PasswordUtil.class);
+                                 EmptyAsset.INSTANCE, "beans.xml")
+                         .addPackage(PasswordUtil.class.getPackage())
+                         .addAsResource(new File("WebContent/WEB-INF/config.properties"));
     }
 
     @Test
