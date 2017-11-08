@@ -25,21 +25,17 @@ public final class PasswordUtil {
      * Each token produced by this class uses this identifier as a prefix.
      */
     public static final String ID = "$31$";
-
-    // TODO: USE CONFIG VALUE
-    /**
-     * The minimum recommended COST, used by default
-     */
-    public static final int COST = 16;
-
     private static final String ALGORITHM = "PBKDF2WithHmacSHA1";
-
     private static final int SIZE = 128;
-
     private static final Pattern layout = Pattern.compile("\\$31\\$(\\d\\d?)\\$(.{43})");
-
     private static final SecureRandom random = new SecureRandom();
 
+    /**
+     * The cost to use, defined in configuration, 0 to 30. Minimum recommended value: 16
+     */
+    private static int getCost() {
+        return ConfigHandler.getInstance().getPBKDF2Cost();
+    }
 
     /**
      * Calculates the amount of iterations based on cost
@@ -62,12 +58,12 @@ public final class PasswordUtil {
     public static String hash(char[] password) {
         byte[] salt = new byte[SIZE / 8];
         random.nextBytes(salt);
-        byte[] dk = pbkdf2(password, salt, iterations(COST));
+        byte[] dk = pbkdf2(password, salt, iterations(getCost()));
         byte[] hash = new byte[salt.length + dk.length];
         System.arraycopy(salt, 0, hash, 0, salt.length);
         System.arraycopy(dk, 0, hash, salt.length, dk.length);
         Base64.Encoder enc = Base64.getUrlEncoder().withoutPadding();
-        return ID + COST + '$' + enc.encodeToString(hash);
+        return ID + getCost() + '$' + enc.encodeToString(hash);
     }
 
     /**
