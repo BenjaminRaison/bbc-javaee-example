@@ -66,8 +66,9 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.jboss.arquillian.container:arquillian-container-test-impl-base:1.1.13.Final" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.jboss.shrinkwrap:shrinkwrap-impl-base:1.2.6" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.jboss.shrinkwrap:shrinkwrap-spi:1.2.6" level="project" />
-    <orderEntry type="library" name="Maven: org.ocpsoft.rewrite:rewrite-servlet:3.4.1.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.ocpsoft.rewrite:rewrite-config-prettyfaces:3.4.1.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.ocpsoft.rewrite:rewrite-integration-faces:3.4.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: com.ocpsoft:prettyfaces-jsf2:3.2.0" level="project" />
+    <orderEntry type="library" name="Maven: commons-digester:commons-digester:2.0" level="project" />
+    <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.8.0" level="project" />
+    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
   </component>
 </module>

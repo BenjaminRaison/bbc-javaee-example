@@ -10,10 +10,6 @@
         </servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    <context-param>
-        <param-name>com.ocpsoft.pretty.BASE_PACKAGES</param-name>
-        <param-value>ch.bbcag.javaee</param-value>
-    </context-param>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.jsf</url-pattern>
