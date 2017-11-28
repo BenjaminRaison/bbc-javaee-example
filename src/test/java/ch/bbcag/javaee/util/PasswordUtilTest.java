@@ -9,8 +9,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.io.File;
-
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -22,8 +20,7 @@ public class PasswordUtilTest {
         return ShrinkWrap.create(WebArchive.class)
                          .addAsManifestResource(
                                  EmptyAsset.INSTANCE, "beans.xml")
-                         .addPackage(PasswordUtil.class.getPackage())
-                         .addAsResource(new File("WebContent/WEB-INF/config.properties"));
+                .addPackage(PasswordUtil.class.getPackage());
     }
 
     @Test
@@ -38,6 +35,7 @@ public class PasswordUtilTest {
         String password = "Welcome$17";
         String token = PasswordUtil.hash(password);
         assertTrue("Token should be valid", PasswordUtil.isValid(password, token));
+        assertTrue("Token should be valid", PasswordUtil.isValid(password.toCharArray(), token));
     }
 
 }
