@@ -21,7 +21,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="" />
         <datasource-mapping>
-          <factory-entry name="onlineshop-war" value="b889d698-cd76-4c1a-82d4-b45b55d7cbb3" />
+          <factory-entry name="onlineshop-war" value="19324990-1a92-49b3-bf93-13368150fd5f" />
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>

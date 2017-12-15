@@ -1,10 +1,12 @@
 package ch.bbcag.javaee.model;
 
+import javax.inject.Named;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+@Named
 @Entity
 @Table(schema = "gamexchange", name = "customer")
 @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c")
