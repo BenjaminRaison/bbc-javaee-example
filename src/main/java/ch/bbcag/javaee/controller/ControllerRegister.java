@@ -10,6 +10,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import javax.transaction.*;
@@ -35,23 +36,35 @@ public class ControllerRegister implements Serializable {
     private UserTransaction userTransaction;
 
     public String validateAndSave() {
+        if (password == null || passwordRepeated == null || email == null) {
+            // TODO: Show error message
+            return "/register.jsf";
+        }
         if (!password.equals(passwordRepeated)) {
             // TODO: Show error message
             return "/register.jsf";
         }
         customer.setEmail(email);
         customer.setPassword(PasswordUtil.hash(password));
+        EntityManager manager = null;
         try {
             userTransaction.begin();
-            emFactory.createEntityManager().persist(customer);
+            manager = emFactory.createEntityManager();
+            manager.persist(customer);
 
             userTransaction.commit();
         } catch (NotSupportedException | SystemException | RollbackException |
                 HeuristicMixedException | HeuristicRollbackException e) {
             // TODO: Throw error
             logger.loge("Unable to register user with email: " + email, e);
+        } catch (Exception e) {
+            logger.loge("Error occurred", e);
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
         }
-        // TODO: redirect somewhere else
+        // TODO: redirect somewhere else*/
         return "/register.jsf";
     }
 

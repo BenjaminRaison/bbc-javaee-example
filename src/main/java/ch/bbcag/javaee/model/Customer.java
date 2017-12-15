@@ -1,16 +1,18 @@
 package ch.bbcag.javaee.model;
 
-import javax.inject.Named;
+import javax.enterprise.inject.Model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-@Named
+@Model
 @Entity
 @Table(schema = "gamexchange", name = "customer")
 @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c")
 public class Customer implements Serializable {
+
+    @Transient
     private static final long serialVersionUID = 1L;
 
     @Id

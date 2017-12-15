@@ -1,9 +1,11 @@
 package ch.bbcag.javaee.model;
 
+import javax.enterprise.inject.Model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@Model
 @Entity
 @Table(schema = "gamexchange", name = "item")
 @NamedQuery(name = "Item.findAll", query = "SELECT i FROM Item i")

@@ -7,10 +7,10 @@
         <b:well>
             <h:form>
                 <h:panelGrid columns="1" cellpadding="10">
-                    <b:inputText label="E-Mail" type="email" value="#{controllerRegister.email}"/>
-                    <b:inputSecret label="Password" value="#{controllerRegister.password}"/>
-                    <b:inputSecret label="Repeat Password" value="#{controllerRegister.passwordRepeated}"/>
-                    <b:commandButton action="#{controllerRegister.validateAndSave}" look="primary"/>
+                    <b:inputText label="E-Mail:" type="email" value="#{controllerRegister.email}"/>
+                    <b:inputSecret label="Password:" value="#{controllerRegister.password}"/>
+                    <b:inputSecret label="Repeat Password:" value="#{controllerRegister.passwordRepeated}"/>
+                    <b:commandButton action="#{controllerRegister.validateAndSave()}" value="Submit" look="primary"/>
                 </h:panelGrid>
             </h:form>
         </b:well>

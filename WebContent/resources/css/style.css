@@ -1,7 +1,14 @@
-.content {
-    margin-top: 40px;
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
-footer {
-    text-align: center;
+main {
+    flex: 1 0 auto;
+}
+
+.underline {
+    text-decoration: underline;
+    color: inherit;
 }
