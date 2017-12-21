@@ -1,7 +1,6 @@
 <ui:composition template="/template/template.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
->
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:define name="content">
         <div class="row">
             <h2>#{msg['signin']}</h2>
@@ -21,8 +20,9 @@
                     </div>
                 </div>
                 <div class="row right">
-                    <a href="#{facesContext.externalContext.applicationContextPath}/register.jsf">
-                        <button class="waves-effect waves-light btn">#{msg['register']}</button>
+                    <a class="waves-effect waves-light btn"
+                       href="#{facesContext.externalContext.applicationContextPath}/register.jsf">
+                        #{msg['register']}
                     </a>
                     <button class="waves-effect waves-light btn" type="submit"><i
                             class="material-icons right">send</i>#{msg['signin']}</button>
