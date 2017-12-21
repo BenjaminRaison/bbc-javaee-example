@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:view locale="en">
+    <h:head>
+        <title><h:outputText value="Moin"/></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <base href="#{request.contextPath}"/>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="application/javascript"/>
+    </h:head>
+    <h:body>
+        <h:messages globalOnly="true"/>
+        <header>
+            <ui:insert name="header">
+                <ui:include src="header2.xhtml"/>
+            </ui:insert>
+        </header>
+        <main>
+            <div class="container content">
+                <ui:insert name="content"/>
+            </div>
+        </main>
+        <footer class="page-footer">
+            <ui:insert name="footer">
+                <ui:include src="footer2.xhtml"/>
+            </ui:insert>
+        </footer>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"
+                type="application/javascript"/>
+        <h:outputScript library="js" name="script.js"/>
+    </h:body>
+</f:view>
+</html>

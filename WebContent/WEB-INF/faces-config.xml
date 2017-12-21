@@ -9,7 +9,7 @@
             <supported-locale>de</supported-locale>
         </locale-config>
         <resource-bundle>
-            <base-name>messages</base-name>
+            <base-name>ch.bbcag.javaee.messages</base-name>
             <var>msg</var>
         </resource-bundle>
     </application>
