@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
 
 <f:view locale="en">
     <h:head>
@@ -18,7 +19,21 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="application/javascript"/>
     </h:head>
     <h:body>
-        <h:messages globalOnly="true"/>
+        <script>
+            var messages = [];
+
+            function showMessages() {
+                messages.forEach(function (e) {
+                    Materialize.toast(e, 4000);
+                });
+            }
+        </script>
+        <ui:repeat value="#{messageHandler.messages}" var="message">
+            <script>
+                messages.push("#{message.toString()}");
+            </script>
+        </ui:repeat>
+        #{messageHandler.clearMessages()}
         <header>
             <ui:insert name="header">
                 <ui:include src="header.xhtml"/>

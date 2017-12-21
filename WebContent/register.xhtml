@@ -1,42 +1,61 @@
 <ui:composition template="/template/template.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
->
+                xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:jsf="http://xmlns.jcp.org/jsf/passthrough">
     <ui:define name="content">
         <div class="row">
             <h2>#{msg['register']}</h2>
         </div>
         <div class="row">
-            <form class="col s12">
+            <h:form class="col s12">
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="name" type="text" class="validate" required=""/>
-                        <label for="name">#{msg['name']}</label>
+                        <div class="input-field">
+                            <i class="material-icons prefix">account_circle</i>
+                            <h:inputText id="name" jsf:type="text" value="#{controllerRegister.username}"
+                                         class="validate" jsf:autocomplete="username"
+                                         jsf:required="true"/>
+                            <label for="name">#{msg['name']}</label>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="email" type="email" class="validate" required=""/>
-                        <label for="email" data-error="#{msg['email_invalid']}">#{msg['email']}</label>
+                        <div class="input-field">
+                            <i class="material-icons prefix">email</i>
+                            <h:inputText id="email" jsf:type="email" class="validate"
+                                         value="#{controllerRegister.email}"
+                                         jsf:autocomplete="username email" jsf:required="true"/>
+                            <label for="email" data-error="#{msg['email_invalid']}">#{msg['email']}</label>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="password" type="password" class="validate" required=""/>
-                        <label for="password">#{msg['password']}</label>
+                        <div class="input-field">
+                            <i class="material-icons prefix">vpn_key</i>
+                            <h:inputSecret id="password" class="validate" value="#{controllerRegister.password}"
+                                           jsf:autocomplete="new-password" jsf:required="true"/>
+                            <label for="password">#{msg['password']}</label>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="password_repeated" type="password" class="validate" required=""/>
-                        <label for="password_repeated">#{msg['password_repeat']}</label>
+                        <div class="input-field">
+                            <i class="material-icons prefix">vpn_key</i>
+                            <h:inputSecret id="password_repeated" value="#{controllerRegister.passwordRepeated}"
+                                           class="validate" jsf:autocomplete="new-password" jsf:required="true"/>
+                            <label for="password_repeated">#{msg['password_repeat']}</label>
+                        </div>
                     </div>
                 </div>
                 <div class="row right">
-                    <button class="waves-effect waves-light btn" type="submit"><i
-                            class="material-icons right">send</i>#{msg['register']}</button>
+                    <h:commandButton value="#{msg['register']}" immediate="false"
+                                     action="#{controllerRegister.validateAndSave}"
+                                     styleClass="waves-effect waves-light btn"/>
                 </div>
-            </form>
+            </h:form>
         </div>
     </ui:define>
 </ui:composition>
