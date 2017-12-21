@@ -10,22 +10,34 @@
     <h:head>
         <title><h:outputText value="Moin"/></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <base href="#{request.contextPath}"/>
         <h:outputStylesheet library="css" name="style.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="application/javascript"/>
     </h:head>
     <h:body>
         <h:messages globalOnly="true"/>
+        <header>
+            <ui:insert name="header">
+                <ui:include src="header.xhtml"/>
+            </ui:insert>
+        </header>
+        <main>
+            <div class="container content">
+                <ui:insert name="content"/>
+            </div>
+        </main>
+        <footer class="page-footer">
+            <ui:insert name="footer">
+                <ui:include src="footer.xhtml"/>
+            </ui:insert>
+        </footer>
 
-        <ui:insert name="header">
-            <ui:include src="header.xhtml"/>
-        </ui:insert>
-
-        <div class="container content">
-            <ui:insert name="content"/>
-        </div>
-
-        <ui:insert name="footer">
-            <ui:include src="footer.xhtml"/>
-        </ui:insert>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"
+                type="application/javascript"/>
+        <h:outputScript library="js" name="script.js"/>
     </h:body>
 </f:view>
 </html>

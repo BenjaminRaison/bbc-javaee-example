@@ -1,13 +1,20 @@
 <ui:composition template="/template/template.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:b="http://bootsfaces.net/ui">
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:define name="content">
-        <b:jumbotron>
-            <h1><h:outputText value="Moin"/></h1>
-            <p><h:outputText value="Baum"/></p>
-            <p><b:button value="Lauch" size="lg" look="primary" outcome="register.jsp"/></p>
-        </b:jumbotron>
+        <div class="row">
+            <div class="col s12 m12">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">#{msg['site_name']}</span>
+                        <p>#{msg['index_marketing_text']}</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="signin.jsf">#{msg['signin']}</a>
+                        <a href="browse.jsf">#{msg['browse']}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </ui:define>
 </ui:composition>

@@ -1,18 +1,41 @@
 <ui:composition template="/template/template.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:b="http://bootsfaces.net/ui">
+>
     <ui:define name="content">
-        <b:well>
-            <h:form>
-                <h:panelGrid columns="1" cellpadding="10">
-                    <b:inputText label="E-Mail:" type="email" value="#{controllerRegister.email}"/>
-                    <b:inputSecret label="Password:" value="#{controllerRegister.password}"/>
-                    <b:inputSecret label="Repeat Password:" value="#{controllerRegister.passwordRepeated}"/>
-                    <b:commandButton action="#{controllerRegister.validateAndSave()}" value="Submit" look="primary"/>
-                </h:panelGrid>
-            </h:form>
-        </b:well>
+        <div class="row">
+            <h2>#{msg['register']}</h2>
+        </div>
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="name" type="text" class="validate" required=""/>
+                        <label for="name">#{msg['name']}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email" type="email" class="validate" required=""/>
+                        <label for="email" data-error="#{msg['email_invalid']}">#{msg['email']}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="password" type="password" class="validate" required=""/>
+                        <label for="password">#{msg['password']}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="password_repeated" type="password" class="validate" required=""/>
+                        <label for="password_repeated">#{msg['password_repeat']}</label>
+                    </div>
+                </div>
+                <div class="row right">
+                    <button class="waves-effect waves-light btn" type="submit">#{msg['register']}</button>
+                </div>
+            </form>
+        </div>
     </ui:define>
 </ui:composition>
