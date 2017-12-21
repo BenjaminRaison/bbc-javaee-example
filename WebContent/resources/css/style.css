@@ -17,3 +17,14 @@ a.underline {
     text-decoration: underline;
     color: inherit;
 }
+
+/* Because materialize expects li>a, not li a*/
+.side-nav a {
+    color: rgba(0, 0, 0, 57);
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 32px;
+}

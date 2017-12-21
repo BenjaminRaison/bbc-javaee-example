@@ -1,7 +1,8 @@
 package ch.bbcag.javaee.controller;
 
+import ch.bbcag.javaee.LocaleHandler;
 import ch.bbcag.javaee.MessageHandler;
-import ch.bbcag.javaee.Session;
+import ch.bbcag.javaee.UserSession;
 import ch.bbcag.javaee.model.User;
 import ch.bbcag.javaee.util.LogHelper;
 import ch.bbcag.javaee.util.PasswordUtil;
@@ -28,7 +29,7 @@ public class ControllerRegister {
     private String passwordRepeated;
 
     @Inject
-    private Session session;
+    private UserSession userSession;
 
     @Inject
     private MessageHandler msgHandler;
@@ -39,17 +40,20 @@ public class ControllerRegister {
     @Resource
     private UserTransaction userTransaction;
 
+    @Inject
+    private LocaleHandler localeHandler;
+
     public String validateAndSave() {
         User user = new User();
         try {
             if (username == null || email == null || password == null || passwordRepeated == null) {
                 logger.logw("A value is null");
-                msgHandler.addMessage("Missing value(s)!");
+                msgHandler.addMessage(localeHandler.getString("error_missing_values"));
                 return "/register.jsf";
             }
             if (!password.equals(passwordRepeated)) {
                 logger.logw("Passwords do not match");
-                msgHandler.addMessage("Passwords don't match!");
+                msgHandler.addMessage(localeHandler.getString("error_passwords_different"));
                 return "/register.jsf";
             }
             user.setName(username);
@@ -70,9 +74,9 @@ public class ControllerRegister {
             }
             throw new RuntimeException(e);
         }
-        session.setUser(user);
-        msgHandler.addMessage("Logged in!");
-        return "/register.jsf";
+        userSession.setUser(user);
+        msgHandler.addMessage(localeHandler.getString("signin_successful"));
+        return "/index.jsf";
     }
 
     public String getUsername() {

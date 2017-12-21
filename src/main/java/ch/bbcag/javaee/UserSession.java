@@ -9,18 +9,19 @@ import java.io.Serializable;
 
 @Named
 @SessionScoped
-public class Session implements Serializable {
+public class UserSession implements Serializable {
 
 
     private Long id = -1L;
     private String email;
     private boolean isLoggedIn = false;
 
-    public void logout() {
+    public String logout() {
         this.id = -1L;
         email = null;
         isLoggedIn = false;
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "/index.jsf";
     }
 
     public void setUser(User user) {

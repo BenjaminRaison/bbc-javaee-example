@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
 >
 
     <nav>
@@ -9,17 +10,47 @@
             <a href="" class="brand-logo"><i class="material-icons">swap_horiz</i>#{msg['site_name']}</a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="#{facesContext.externalContext.applicationContextPath}/signin.jsf">#{msg['signin']}</a>
+                <li>
+                    <c:choose>
+                        <c:when test="#{userSession.loggedIn}">
+                            <h:form>
+                                <h:commandLink value="#{msg['signout']}" action="#{userSession.logout()}"/>
+                            </h:form>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="#{facesContext.externalContext.applicationContextPath}/signin.jsf">#{msg['signin']}</a>
+                        </c:otherwise>
+                    </c:choose>
                 </li>
+                <!--FIXME: FInd a better way to do links-->
                 <li><a href="#{facesContext.externalContext.applicationContextPath}/sell.jsf">#{msg['sell']}</a></li>
                 <li><a href="#{facesContext.externalContext.applicationContextPath}/browse.jsf">#{msg['browse']}</a>
                 </li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
-                <li><a href="#{facesContext.externalContext.applicationContextPath}/signin.jsf">#{msg['signin']}</a>
+                <li>
+                    <c:choose>
+                        <c:when test="#{userSession.loggedIn}">
+                            <h:form>
+                                <h:commandLink value="#{msg['signout']}" action="#{userSession.logout()}"/>
+                            </h:form>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="#{facesContext.externalContext.applicationContextPath}/signin.jsf">#{msg['signin']}</a>
+                        </c:otherwise>
+                    </c:choose>
                 </li>
                 <li><a href="#{facesContext.externalContext.applicationContextPath}/sell.jsf">#{msg['sell']}</a></li>
                 <li><a href="#{facesContext.externalContext.applicationContextPath}/browse.jsf">#{msg['browse']}</a>
+                </li>
+                <li>
+                    <a class="dropdown-button btn" href="#"
+                       data-activates="dropdown-lang">#{msg[localeHandler.locale]}</a>
+                    <ul id="dropdown-lang" class="dropdown-content">
+                        <li><a href="#">one</a></li>
+                        <li><a href="#">two</a></li>
+                        <!--FIXME: Make language selection work, preferable in a <select> -->
+                    </ul>
                 </li>
             </ul>
         </div>
