@@ -8,7 +8,12 @@ main {
     flex: 1 0 auto;
 }
 
-.underline {
+.underline a {
+    text-decoration: underline;
+    color: inherit;
+}
+
+a.underline {
     text-decoration: underline;
     color: inherit;
 }
