@@ -9,14 +9,10 @@ import ch.bbcag.javaee.util.LogHelper;
 import ch.bbcag.javaee.util.PasswordUtil;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
-import javax.transaction.UserTransaction;
 
 @RequestScoped
 @Named
@@ -35,12 +31,6 @@ public class ControllerRegister {
     @Inject
     private MessageHandler msgHandler;
 
-    @PersistenceUnit
-    private EntityManagerFactory emFactory;
-
-    @Resource
-    private UserTransaction userTransaction;
-
     @Inject
     private LocaleHandler localeHandler;
 
@@ -49,42 +39,34 @@ public class ControllerRegister {
 
     public String validateAndSave() {
         User user = new User();
-        try {
-            if (username == null || email == null || password == null || passwordRepeated == null ||
-                username.isEmpty() || email.isEmpty() || password.isEmpty() || passwordRepeated.isEmpty()) {
-                logger.logw("A value is missing");
-                msgHandler.addMessage(localeHandler.getString("error_missing_values"));
-                return "/register.jsf";
-            }
-            if (!password.equals(passwordRepeated)) {
-                logger.logw("Passwords do not match");
-                msgHandler.addMessage(localeHandler.getString("error_passwords_different"));
-                return "/register.jsf";
-            }
-            if (userDAO.exists(email)) {
-                logger.logi("Email already registered!");
-                msgHandler.addMessage(localeHandler.getString("error_email_exists"));
-                return "/register.jsf";
-            }
-            user.setName(username);
-            user.setEmail(email);
-            user.setBalance(0.0d);
-            user.setPassword(PasswordUtil.hash(password));
-
-            userTransaction.begin();
-            emFactory.createEntityManager().persist(user);
-            userTransaction.commit();
-
-        } catch (Exception e) {
-            logger.loge("Unable to register user", e);
-            try {
-                userTransaction.rollback();
-            } catch (Exception e2) {
-                logger.loge("Unable to roll back transaction", e2);
-                throw new RuntimeException(e2);
-            }
-            throw new RuntimeException(e);
+        if (username == null || email == null || password == null || passwordRepeated == null ||
+            username.isEmpty() || email.isEmpty() || password.isEmpty() || passwordRepeated.isEmpty()) {
+            logger.logw("A value is missing");
+            msgHandler.addMessage(localeHandler.getString("error_missing_values"));
+            return "/register.jsf";
         }
+        if (!password.equals(passwordRepeated)) {
+            logger.logw("Passwords do not match");
+            msgHandler.addMessage(localeHandler.getString("error_passwords_different"));
+            return "/register.jsf";
+        }
+        if (userDAO.exists(email)) {
+            logger.logi("Email already registered!");
+            msgHandler.addMessage(localeHandler.getString("error_email_exists"));
+            return "/register.jsf";
+        }
+        user.setName(username);
+        user.setEmail(email);
+        user.setBalance(0.0d);
+        user.setPassword(PasswordUtil.hash(password));
+
+        try {
+            userDAO.insertUser(user);
+        } catch (Exception e) {
+            msgHandler.addMessage(localeHandler.getString("error_cant_save_user"));
+            return "/register.jsf";
+        }
+
         userSession.setUser(user);
         msgHandler.addMessage(localeHandler.getString("signin_successful"));
         return "/index.jsf";
