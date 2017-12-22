@@ -26,6 +26,17 @@
                 <li><a href="#{facesContext.externalContext.applicationContextPath}/sell.jsf">#{msg['sell']}</a></li>
                 <li><a href="#{facesContext.externalContext.applicationContextPath}/browse.jsf">#{msg['browse']}</a>
                 </li>
+                <li><a class="dropdown-button waves-effect waves-light btn" href="#"
+                       data-activates="dropdown-lang" data-beloworigin="true"><i
+                        class="material-icons right color-white-important">arrow_drop_down</i>#{msg[localeHandler.locale]}
+                </a>
+                    <ul id="dropdown-lang" class="dropdown-content">
+                        <h:form>
+                            <li><h:commandLink value="#{msg['en']}" action="#{localeHandler.setLocale('en')}"/></li>
+                            <li><h:commandLink value="#{msg['de']}" action="#{localeHandler.setLocale('de')}"/></li>
+                        </h:form>
+                    </ul>
+                </li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
                 <li>
@@ -44,12 +55,15 @@
                 <li><a href="#{facesContext.externalContext.applicationContextPath}/browse.jsf">#{msg['browse']}</a>
                 </li>
                 <li>
-                    <a class="dropdown-button btn" href="#"
-                       data-activates="dropdown-lang">#{msg[localeHandler.locale]}</a>
-                    <ul id="dropdown-lang" class="dropdown-content">
-                        <li><a href="#">one</a></li>
-                        <li><a href="#">two</a></li>
-                        <!--FIXME: Make language selection work, preferable in a <select> -->
+                    <a class="dropdown-button waves-effect waves-light btn" href="#"
+                       data-activates="dropdown-lang-mobile" data-beloworigin="true"><i
+                            class="material-icons right color-white-important">arrow_drop_down</i>#{msg[localeHandler.locale]}
+                    </a>
+                    <ul id="dropdown-lang-mobile" class="dropdown-content">
+                        <h:form>
+                            <li><h:commandLink value="#{msg['en']}" action="#{localeHandler.setLocale('en')}"/></li>
+                            <li><h:commandLink value="#{msg['de']}" action="#{localeHandler.setLocale('de')}"/></li>
+                        </h:form>
                     </ul>
                 </li>
             </ul>

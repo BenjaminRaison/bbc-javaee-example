@@ -7,7 +7,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
 >
 
-<f:view locale="en">
+<f:view locale="#{localeHandler.locale}">
+    <f:loadBundle var="msg" basename="ch.bbcag.javaee.messages"/>
     <h:head>
         <title><h:outputText value="Moin"/></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
