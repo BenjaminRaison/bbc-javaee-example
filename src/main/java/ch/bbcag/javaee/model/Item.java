@@ -9,6 +9,7 @@ import java.util.Date;
 @Entity
 @Table(schema = "gamexchange", name = "item")
 @NamedQuery(name = "Item.findAll", query = "SELECT i FROM Item i")
+@Deprecated
 public class Item implements Serializable {
     private static final long serialVersionUID = 1L;
 

@@ -1,33 +1,37 @@
 <ui:composition template="/template/template.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:jsf="http://xmlns.jcp.org/jsf/passthrough">
     <ui:define name="content">
         <div class="row">
             <h2>#{msg['signin']}</h2>
         </div>
         <div class="row">
-            <form class="col s12">
+            <h:form class="col s12">
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="email" type="email" class="validate" required=""/>
+                        <h:inputText id="email" jsf:type="email" jsf:autocomplete="username email" class="validate"
+                                     jsf:required="true"
+                                     value="#{controllerSignin.email}"/>
                         <label for="email" data-error="#{msg['email_invalid']}">#{msg['email']}</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="password" type="password" class="validate" required=""/>
+                        <h:inputSecret id="password" class="validate" value="#{controllerSignin.password}"
+                                       jsf:autocomplete="current-password" jsf:required="true"/>
                         <label for="password">#{msg['password']}</label>
                     </div>
                 </div>
                 <div class="row right">
-                    <a class="waves-effect waves-light btn"
+                    <a class="waves-effect waves-light btn pink darken-2"
                        href="#{facesContext.externalContext.applicationContextPath}/register.jsf">
                         #{msg['register']}
                     </a>
-                    <button class="waves-effect waves-light btn" type="submit"><i
-                            class="material-icons right">send</i>#{msg['signin']}</button>
+                    <h:commandButton styleClass="waves-effect waves-light btn" value="#{msg['signin']}"
+                                     action="#{controllerSignin.signin}"/>
                 </div>
-            </form>
+            </h:form>
         </div>
     </ui:define>
 </ui:composition>

@@ -24,7 +24,7 @@ public class UserSession implements Serializable {
         return "/index.jsf";
     }
 
-    public void setUser(User user) {
+    public void signInUser(User user) {
         this.id = user.getId();
         this.email = user.getEmail();
         this.isLoggedIn = true;

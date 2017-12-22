@@ -67,7 +67,7 @@ public class ControllerRegister {
             return "/register.jsf";
         }
 
-        userSession.setUser(user);
+        userSession.signInUser(user);
         msgHandler.addMessage(localeHandler.getString("signin_successful"));
         return "/index.jsf";
     }

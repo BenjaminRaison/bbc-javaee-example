@@ -10,6 +10,7 @@ import java.util.Set;
 @Entity
 @Table(schema = "gamexchange", name = "customer")
 @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c")
+@Deprecated
 public class Customer implements Serializable {
 
     @Transient
