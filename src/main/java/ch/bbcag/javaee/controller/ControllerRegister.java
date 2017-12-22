@@ -3,6 +3,7 @@ package ch.bbcag.javaee.controller;
 import ch.bbcag.javaee.LocaleHandler;
 import ch.bbcag.javaee.MessageHandler;
 import ch.bbcag.javaee.UserSession;
+import ch.bbcag.javaee.db.UserDAO;
 import ch.bbcag.javaee.model.User;
 import ch.bbcag.javaee.util.LogHelper;
 import ch.bbcag.javaee.util.PasswordUtil;
@@ -43,11 +44,15 @@ public class ControllerRegister {
     @Inject
     private LocaleHandler localeHandler;
 
+    @Inject
+    private UserDAO userDAO;
+
     public String validateAndSave() {
         User user = new User();
         try {
-            if (username == null || email == null || password == null || passwordRepeated == null) {
-                logger.logw("A value is null");
+            if (username == null || email == null || password == null || passwordRepeated == null ||
+                username.isEmpty() || email.isEmpty() || password.isEmpty() || passwordRepeated.isEmpty()) {
+                logger.logw("A value is missing");
                 msgHandler.addMessage(localeHandler.getString("error_missing_values"));
                 return "/register.jsf";
             }
@@ -56,7 +61,13 @@ public class ControllerRegister {
                 msgHandler.addMessage(localeHandler.getString("error_passwords_different"));
                 return "/register.jsf";
             }
+            if (userDAO.exists(email)) {
+                logger.logi("Email already registered!");
+                msgHandler.addMessage(localeHandler.getString("error_email_exists"));
+                return "/register.jsf";
+            }
             user.setName(username);
+            user.setEmail(email);
             user.setBalance(0.0d);
             user.setPassword(PasswordUtil.hash(password));
 
