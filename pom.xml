@@ -5,6 +5,18 @@
     <artifactId>bbc-javaee-example</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
+
+    <developers>
+        <developer>
+            <name>Benjamin Raison</name>
+            <email>benjamin.raison@credit-suisse.com</email>
+        </developer>
+    </developers>
+
+    <properties>
+        <browser>phantomjs</browser> <!-- Default test browser -->
+    </properties>
+
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
         <resources>
@@ -12,6 +24,14 @@
                 <directory>src/main/resources</directory>
             </resource>
         </resources>
+
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+
         <plugins>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
@@ -39,6 +59,20 @@
                 <version>1.1.13.Final</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.selenium</groupId>
+                <artifactId>selenium-bom</artifactId>
+                <version>2.53.1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-drone-bom</artifactId>
+                <version>2.0.1.Final</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -70,6 +104,13 @@
             <version>1.1.13.Final</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.graphene</groupId>
+            <artifactId>graphene-webdriver</artifactId>
+            <version>2.1.0.Final</version>
+            <type>pom</type>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>
@@ -88,6 +129,12 @@
                     <scope>provided</scope>
                 </dependency>
             </dependencies>
+        </profile>
+        <profile>
+            <id>chrome</id>
+            <properties>
+                <browser>chrome</browser>
+            </properties>
         </profile>
     </profiles>
 </project>

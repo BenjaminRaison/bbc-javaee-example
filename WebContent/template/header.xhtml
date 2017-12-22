@@ -14,11 +14,12 @@
                     <c:choose>
                         <c:when test="#{userSession.loggedIn}">
                             <h:form>
-                                <h:commandLink value="#{msg['signout']}" action="#{userSession.logout()}"/>
+                                <h:commandLink value="#{msg['signout']}" action="#{userSession.logout()}" id="signout"/>
                             </h:form>
                         </c:when>
                         <c:otherwise>
-                            <a href="#{facesContext.externalContext.applicationContextPath}/signin.jsf">#{msg['signin']}</a>
+                            <a id="signin"
+                               href="#{facesContext.externalContext.applicationContextPath}/signin.jsf">#{msg['signin']}</a>
                         </c:otherwise>
                     </c:choose>
                 </li>
@@ -26,7 +27,7 @@
                 <li><a href="#{facesContext.externalContext.applicationContextPath}/sell.jsf">#{msg['sell']}</a></li>
                 <li><a href="#{facesContext.externalContext.applicationContextPath}/browse.jsf">#{msg['browse']}</a>
                 </li>
-                <li><a class="dropdown-button waves-effect waves-light btn" href="#"
+                <li><a id="dropdown-lang-button" class="dropdown-button waves-effect waves-light btn" href="#"
                        data-activates="dropdown-lang" data-beloworigin="true"><i
                         class="material-icons right color-white-important">arrow_drop_down</i>#{msg[localeHandler.locale]}
                 </a>
@@ -43,11 +44,13 @@
                     <c:choose>
                         <c:when test="#{userSession.loggedIn}">
                             <h:form>
-                                <h:commandLink value="#{msg['signout']}" action="#{userSession.logout()}"/>
+                                <h:commandLink id="signout-mobile" value="#{msg['signout']}"
+                                               action="#{userSession.logout()}"/>
                             </h:form>
                         </c:when>
                         <c:otherwise>
-                            <a href="#{facesContext.externalContext.applicationContextPath}/signin.jsf">#{msg['signin']}</a>
+                            <a id="signin-mobile"
+                               href="#{facesContext.externalContext.applicationContextPath}/signin.jsf">#{msg['signin']}</a>
                         </c:otherwise>
                     </c:choose>
                 </li>
@@ -55,7 +58,7 @@
                 <li><a href="#{facesContext.externalContext.applicationContextPath}/browse.jsf">#{msg['browse']}</a>
                 </li>
                 <li>
-                    <a class="dropdown-button waves-effect waves-light btn" href="#"
+                    <a id="dropdown-lang-mobile-button" class="dropdown-button waves-effect waves-light btn" href="#"
                        data-activates="dropdown-lang-mobile" data-beloworigin="true"><i
                             class="material-icons right color-white-important">arrow_drop_down</i>#{msg[localeHandler.locale]}
                     </a>
