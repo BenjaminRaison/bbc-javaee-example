@@ -10,7 +10,7 @@
 <f:view locale="#{localeHandler.locale}">
     <f:loadBundle var="msg" basename="ch.bbcag.javaee.messages"/>
     <h:head>
-        <title><h:outputText value="Moin"/></title>
+        <title><h:outputText value="#{msg['site_name']}"/></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>

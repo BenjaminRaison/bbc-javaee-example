@@ -24,6 +24,7 @@ public class LocaleTest {
 
     @Drone
     private WebDriver browser;
+
     @ArquillianResource
     private URL       deploymentURL;
 
@@ -67,7 +68,7 @@ public class LocaleTest {
             elementNum = 1;
         }
         btnDropdown.click();
-        Thread.sleep(1000);
+        Thread.sleep(1000); // Wait for animation
         dropdown.findElement(By.cssSelector("a:nth-child(" + elementNum + ")")).click();
         assertNotEquals(signinText, linkSignin.getText());
     }
@@ -83,7 +84,7 @@ public class LocaleTest {
             elementNum = 1;
         }
         hamburger.click();
-        Thread.sleep(1000);
+        Thread.sleep(1000); // Wait for animation
         btnDropdownMobile.click();
         dropdownMobile.findElements(By.tagName("a")).get(elementNum).click();
         assertNotEquals(signinText, linkSigninMobile.getText());

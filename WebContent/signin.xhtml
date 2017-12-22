@@ -28,7 +28,7 @@
                        href="#{facesContext.externalContext.applicationContextPath}/register.jsf">
                         #{msg['register']}
                     </a>
-                    <h:commandButton styleClass="waves-effect waves-light btn" value="#{msg['signin']}"
+                    <h:commandButton jsf:id="signin" styleClass="waves-effect waves-light btn" value="#{msg['signin']}"
                                      action="#{controllerSignin.signin}"/>
                 </div>
             </h:form>
