@@ -1,9 +1,7 @@
 package ch.bbcag.javaee.util;
 
-import ch.bbcag.javaee.db.UserDAO;
 import ch.bbcag.javaee.model.User;
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -17,7 +15,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import javax.inject.Inject;
 import java.net.URL;
 
 import static org.junit.Assert.assertTrue;
@@ -31,9 +28,6 @@ public class LoginTest {
     @ArquillianResource
     private URL deploymentURL;
 
-    @Inject
-    private UserDAO userDAO;
-
     @FindBy(css = "input[type=email]")
     private WebElement txtEmail;
 
@@ -45,7 +39,7 @@ public class LoginTest {
 
     private User user;
 
-    @Deployment
+    @Deployment(testable = false)
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(MavenImporter.class)
                          .loadPomFromFile("pom.xml")
@@ -64,7 +58,6 @@ public class LoginTest {
     }
 
     @Test
-    @RunAsClient
     public void test_signin_success() throws Exception {
         browser.navigate().to(deploymentURL + "signin.jsf");
         txtEmail.sendKeys(user.getEmail());
@@ -76,7 +69,6 @@ public class LoginTest {
     }
 
     @Test
-    @RunAsClient
     public void test_signin_fail() throws Exception {
         browser.navigate().to(deploymentURL + "signin.jsf");
         txtEmail.sendKeys(user.getEmail());
